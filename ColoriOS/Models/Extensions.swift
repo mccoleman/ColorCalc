@@ -39,8 +39,29 @@ extension UIImageView {
     }
 }
 
+extension UIView {
+    func quadrantInView(view:UIView) -> Quadrant{
+        
+        if self.bounds.contains(view.center) {
+            if view.center.x > self.center.x {
+                if view.center.y < self.center.y{
+                    return .I
+                }
+                return .IV
+            } else {
+                if view.center.y < self.center.y{
+                    return .II
+                }
+                return .III
+            }
+        }
+        return .I
+    }
+}
+
 extension CGRect {
     func containsWholeRect(rect:CGRect){
         
     }
 }
+

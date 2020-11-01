@@ -23,6 +23,7 @@
 		C0A19921246323FD00166095 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0A1991F246323FD00166095 /* LaunchScreen.storyboard */; };
 		C0A1992C246323FD00166095 /* ColoriOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1992B246323FD00166095 /* ColoriOSTests.swift */; };
 		C0A19937246323FD00166095 /* ColoriOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19936246323FD00166095 /* ColoriOSUITests.swift */; };
+		C0BD6207254E02BC00A156F1 /* ColorOutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BD6206254E02BC00A156F1 /* ColorOutputView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		C0A19932246323FD00166095 /* ColoriOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColoriOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0A19936246323FD00166095 /* ColoriOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoriOSUITests.swift; sourceTree = "<group>"; };
 		C0A19938246323FD00166095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0BD6206254E02BC00A156F1 /* ColorOutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOutputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				C03949EC254B130F00271E20 /* Constants.swift */,
+				C05D179B2549F84900F92079 /* Extensions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -125,6 +128,7 @@
 			children = (
 				C05D17992549BF5B00F92079 /* ColorWheelView.swift */,
 				C05D179D2549F8D000F92079 /* ColorSelectorView.swift */,
+				C0BD6206254E02BC00A156F1 /* ColorOutputView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -170,7 +174,6 @@
 				C0A19913246323FC00166095 /* SceneDelegate.swift */,
 				C052C3292463302600CCEB45 /* ColorCell.swift */,
 				C0A19917246323FC00166095 /* Main.storyboard */,
-				C05D179B2549F84900F92079 /* Extensions.swift */,
 				C0A1991D246323FD00166095 /* Assets.xcassets */,
 				C0A1991F246323FD00166095 /* LaunchScreen.storyboard */,
 				C0A19922246323FD00166095 /* Info.plist */,
@@ -361,6 +364,7 @@
 				C05D179C2549F84900F92079 /* Extensions.swift in Sources */,
 				C03949ED254B130F00271E20 /* Constants.swift in Sources */,
 				C05D179A2549BF5B00F92079 /* ColorWheelView.swift in Sources */,
+				C0BD6207254E02BC00A156F1 /* ColorOutputView.swift in Sources */,
 				C052C32A2463302600CCEB45 /* ColorCell.swift in Sources */,
 				C052C32C2464768A00CCEB45 /* ColorWheelViewController.swift in Sources */,
 				C0A1991C246323FC00166095 /* ColoriOS.xcdatamodeld in Sources */,
