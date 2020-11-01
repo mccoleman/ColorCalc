@@ -185,7 +185,7 @@
                                         </constraints>
                                         <state key="normal" title="Split" image="harmony-split"/>
                                         <connections>
-                                            <action selector="harmonySelectedWithSender:" destination="j38-RN-51z" eventType="touchDragInside" id="GIP-Oe-pM7"/>
+                                            <action selector="harmonySelectedWithSender:" destination="j38-RN-51z" eventType="touchUpInside" id="4Ra-ai-TqR"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0VN-Iw-eAG">

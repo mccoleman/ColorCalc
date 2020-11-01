@@ -13,7 +13,7 @@ let ANALOGOUS_ANGLE_OFFSET:CGFloat = 15
 let TRIADIC_ANGLE_OFFSET:CGFloat = 120
 let TETRADIC_ANGLE_OFFSET:CGFloat = 90
 let SPLIT_ANGLE_OFFSET:CGFloat = 30
-let OPPOSITE_ANGLE_OFFSET = 180
+let OPPOSITE_ANGLE_OFFSET:CGFloat = 180
 
 enum ColorHarmony:Int{
     case None=0,Complementary,Mono,Analogous,Split,Triadic,Tetradic
@@ -92,6 +92,46 @@ func tetradicOrigins(center:CGPoint, basePoint:CGPoint,quadrant:Quadrant) -> [CG
                      tuple.angle + TETRADIC_ANGLE_OFFSET*2,
                      tuple.angle + TETRADIC_ANGLE_OFFSET*3
     ]
+    
+    var newPoints:[CGPoint] = []
+    
+    for angle in newAngles {
+        newPoints.append(getPointFromAngleAndRadius(angle: angle, radius: tuple.radius, center: center))
+    }
+    return newPoints
+}
+
+func getOriginsForColorHarmony(center:CGPoint, basePoint:CGPoint,quadrant:Quadrant, harmony:ColorHarmony) -> [CGPoint]{
+    
+    let tuple = getRadiusAndAngle(center: center, basePoint: basePoint, quadrant: quadrant)
+    var newAngles:[CGFloat] = []
+    switch harmony {
+    case .Complementary:
+        newAngles = [tuple.angle + OPPOSITE_ANGLE_OFFSET]
+    case .Analogous:
+        newAngles = [tuple.angle + ANALOGOUS_ANGLE_OFFSET,
+                    tuple.angle - ANALOGOUS_ANGLE_OFFSET
+        ]
+    case .Mono:
+        break
+    case .Split:
+        newAngles = [tuple.angle + OPPOSITE_ANGLE_OFFSET - SPLIT_ANGLE_OFFSET,
+                     tuple.angle + OPPOSITE_ANGLE_OFFSET + SPLIT_ANGLE_OFFSET
+        ]
+        break
+    case .Triadic:
+        newAngles = [tuple.angle + TETRADIC_ANGLE_OFFSET,
+                    tuple.angle + TRIADIC_ANGLE_OFFSET*2
+        ]
+    case .Tetradic:
+        newAngles = [tuple.angle + TETRADIC_ANGLE_OFFSET,
+                    tuple.angle + TETRADIC_ANGLE_OFFSET*2,
+                    tuple.angle + TETRADIC_ANGLE_OFFSET*3
+        ]
+    default:
+        break
+    }
+    
     
     var newPoints:[CGPoint] = []
     

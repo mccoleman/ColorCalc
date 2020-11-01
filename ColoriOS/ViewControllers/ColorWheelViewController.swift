@@ -79,21 +79,28 @@ class ColorWheelViewController: UIViewController {
     }
     
     @IBAction func harmonySelected(sender: UIButton){
-        if let harmony:ColorHarmony = ColorHarmony(rawValue: sender.tag){
-            self.harmonyState = harmony
-            switch harmony{
-            case .Complementary:
-                self.renderCompelmentarySelectorView()
-//            case .Mono:
-            case .Analogous:
-                self.renderAnalogousSelectorView()
-    //            case .Split:
-            case .Triadic:
-                self.renderTriadicSelectorView()
-            case .Tetradic:
-                self.renderTetradicSelectorView()
-            default:
-                return
+        if let baseSelector = self.baseSelector, let harmony:ColorHarmony = ColorHarmony(rawValue: sender.tag){
+        
+            let points = getOriginsForColorHarmony(
+                center: colorWheelView.center, basePoint:
+                baseSelector.center,
+                quadrant: colorWheelView.quadrantInView(view: baseSelector),
+                harmony: harmony
+            )
+            
+            for point in points{
+                let newColorSector = ColorSelectorView(
+                    frame: CGRect(
+                        x: point.x,
+                        y: point.y,
+                        width: 14,
+                        height: 14
+                    )
+                )
+
+                self.addColorSelectorPanRecognizer(colorSelector: newColorSector)
+                self.selectorsArray.append(newColorSector)
+                self.colorWheelView.addSubview(newColorSector)
             }
         }
     }
@@ -114,123 +121,7 @@ class ColorWheelViewController: UIViewController {
         self.colorsStackView.addArrangedSubview(newColorSector.colorOutput)
     }
     
-    func renderCompelmentarySelectorView(){
-        
-        if let baseSelector = self.baseSelector {
-        
-            let point = complementaryOrigin(
-                center: colorWheelView.center, basePoint:
-                baseSelector.center,
-                quadrant: colorWheelView.quadrantInView(view: baseSelector)
-            )
-            
-            let newColorSector = ColorSelectorView(
-                frame: CGRect(
-                    x: point.x,
-                    y: point.y,
-                    width: 14,
-                    height: 14
-                )
-            )
-  
-            self.addColorSelectorPanRecognizer(colorSelector: newColorSector)
-            self.selectorsArray.append(newColorSector)
-            self.colorWheelView.addSubview(newColorSector)
-        } else {
-            
-        }
-    }
-    
-    func renderAnalogousSelectorView(){
-        
-        if let baseSelector = self.baseSelector {
-        
-            let points = analogousOrigins(
-                center: colorWheelView.center, basePoint:
-                baseSelector.center,
-                quadrant: colorWheelView.quadrantInView(view: baseSelector)
-            )
-            
-            for point in points{
-                let newColorSector = ColorSelectorView(
-                    frame: CGRect(
-                        x: point.x,
-                        y: point.y,
-                        width: 14,
-                        height: 14
-                    )
-                )
 
-                self.addColorSelectorPanRecognizer(colorSelector: newColorSector)
-                self.selectorsArray.append(newColorSector)
-                self.colorWheelView.addSubview(newColorSector)
-            }
-            
-        } else {
-            
-        }
-    }
-    
-    func renderTriadicSelectorView(){
-        
-        if let baseSelector = self.baseSelector {
-        
-            let points = triadicOrigins(
-                center: colorWheelView.center, basePoint:
-                baseSelector.center,
-                quadrant: colorWheelView.quadrantInView(view: baseSelector)
-            )
-            
-            for point in points{
-                let newColorSector = ColorSelectorView(
-                    frame: CGRect(
-                        x: point.x,
-                        y: point.y,
-                        width: 14,
-                        height: 14
-                    )
-                )
-
-                self.addColorSelectorPanRecognizer(colorSelector: newColorSector)
-                self.selectorsArray.append(newColorSector)
-                self.colorWheelView.addSubview(newColorSector)
-            }
-            
-        } else {
-            
-        }
-    }
-    
-    func renderTetradicSelectorView(){
-        
-        if let baseSelector = self.baseSelector {
-        
-            let points = tetradicOrigins(
-                center: colorWheelView.center, basePoint:
-                baseSelector.center,
-                quadrant: colorWheelView.quadrantInView(view: baseSelector)
-            )
-            
-            for point in points{
-                let newColorSector = ColorSelectorView(
-                    frame: CGRect(
-                        x: point.x,
-                        y: point.y,
-                        width: 14,
-                        height: 14
-                    )
-                )
-
-                self.addColorSelectorPanRecognizer(colorSelector: newColorSector)
-                self.selectorsArray.append(newColorSector)
-                self.colorWheelView.addSubview(newColorSector)
-            }
-            
-        } else {
-            
-        }
-    }
-    
     func addColorSelectorPanRecognizer(colorSelector:ColorSelectorView){
         let panGesture = UIPanGestureRecognizer(target: self, action:(#selector(self.panView(_:))))
         colorSelector.addGestureRecognizer(panGesture)
