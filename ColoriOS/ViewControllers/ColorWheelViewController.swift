@@ -50,30 +50,49 @@ class ColorWheelViewController: UIViewController {
         
         if let viewToDrag = sender.view as? ColorSelectorView{
             if self.colorWheelView.bounds.contains(viewToDrag.center){
+                
+                let initialRadiusAngle = getRadiusAndAngle(
+                    center: colorWheelView.center,
+                    basePoint: viewToDrag.center,
+                    quadrant: self.colorWheelView.quadrantInView(view: viewToDrag))
+                
                 viewToDrag.center = CGPoint(
                     x: viewToDrag.center.x + translation.x,
                     y: viewToDrag.center.y + translation.y
                 )
                 sender.setTranslation(CGPoint(x: 0, y: 0), in: viewToDrag)
                 viewToDrag.color = self.colorWheelView.getPixelColorAt(point: viewToDrag.center)
-                
-//                var radiusToCenter
-                let width = abs(colorWheelView.frame.width/2 - viewToDrag.center.x)
-                let height = abs(colorWheelView.frame.width/2 - viewToDrag.center.y)
-                
-                let radius = hypot(width, height)
-                var angle:CGFloat = 0
-                let quadrant = self.colorWheelView.quadrantInView(view: viewToDrag)
-                switch quadrant{
-                case .I, .III:
-                    angle = ((acos(width/radius)*180)/CGFloat.pi) + 90*CGFloat(quadrant.rawValue-1)
-                    print("\(quadrant) radius:\(radius) angle:\(angle)")
-                case .II, .IV:
-                    angle = ((acos(height/radius)*180)/CGFloat.pi) + 90*CGFloat(quadrant.rawValue-1)
-                    print("\(quadrant) radius:\(radius) angle:\(angle)")
-                }
                 self.baseSelector = viewToDrag
-        
+                let newQuadarant = self.colorWheelView.quadrantInView(view: viewToDrag)
+                
+                let newRadiusAngle = getRadiusAndAngle(
+                    center: colorWheelView.center,
+                    basePoint: viewToDrag.center,
+                    quadrant: newQuadarant)
+                
+//                print("i:\(initialRadiusAngle) n:\(newRadiusAngle)")
+                
+                let radiusChange = initialRadiusAngle.radius - newRadiusAngle.radius
+                let angleChange = initialRadiusAngle.angle - newRadiusAngle.angle
+                print("\(radiusChange) ___ \(angleChange)")
+                if lockSlider.isOn{
+                    for selector in selectorsArray {
+                        if selector != baseSelector {
+                            let selectorRadiusAngle = getRadiusAndAngle(
+                                center: self.colorWheelView.center,
+                                basePoint: selector.center,
+                                quadrant: self.colorWheelView.quadrantInView(view: selector)
+                            )
+                       
+                            let newSelectorPoint = getPointFromAngleAndRadius(
+                                angle: selectorRadiusAngle.angle - angleChange,
+                                radius: selectorRadiusAngle.radius - radiusChange,
+                                center: self.colorWheelView.center)
+                            
+                            selector.center = newSelectorPoint
+                        }
+                    }
+                }
             }
         }
     }
@@ -126,14 +145,4 @@ class ColorWheelViewController: UIViewController {
         let panGesture = UIPanGestureRecognizer(target: self, action:(#selector(self.panView(_:))))
         colorSelector.addGestureRecognizer(panGesture)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -1,0 +1,16 @@
+PODS:
+  - ColorThiefSwift (0.4.0)
+
+DEPENDENCIES:
+  - ColorThiefSwift (~> 0.4.0)
+
+SPEC REPOS:
+  trunk:
+    - ColorThiefSwift
+
+SPEC CHECKSUMS:
+  ColorThiefSwift: 643bcd1364b4736ebcd190259646918ca17e8802
+
+PODFILE CHECKSUM: d95f4c56ac91afcc3a25fd75f53c35dbbdffa5c0
+
+COCOAPODS: 1.8.4

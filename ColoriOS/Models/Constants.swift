@@ -58,49 +58,6 @@ func complementaryOrigin(center:CGPoint, basePoint:CGPoint,quadrant:Quadrant) ->
     
 }
 
-func analogousOrigins(center:CGPoint, basePoint:CGPoint,quadrant:Quadrant) -> [CGPoint]{
-    
-    let tuple = getRadiusAndAngle(center: center, basePoint: basePoint, quadrant: quadrant)
-    
-    let newAngles = [tuple.angle - ANALOGOUS_ANGLE_OFFSET, tuple.angle + ANALOGOUS_ANGLE_OFFSET]
-    var newPoints:[CGPoint] = []
-    
-    for angle in newAngles {
-        newPoints.append(getPointFromAngleAndRadius(angle: angle, radius: tuple.radius, center: center))
-    }
-    return newPoints
-}
-
-func triadicOrigins(center:CGPoint, basePoint:CGPoint,quadrant:Quadrant) -> [CGPoint]{
-    
-    let tuple = getRadiusAndAngle(center: center, basePoint: basePoint, quadrant: quadrant)
-    
-    let newAngles = [tuple.angle + TRIADIC_ANGLE_OFFSET, tuple.angle + TRIADIC_ANGLE_OFFSET*2]
-    var newPoints:[CGPoint] = []
-    
-    for angle in newAngles {
-        newPoints.append(getPointFromAngleAndRadius(angle: angle, radius: tuple.radius, center: center))
-    }
-    return newPoints
-}
-
-func tetradicOrigins(center:CGPoint, basePoint:CGPoint,quadrant:Quadrant) -> [CGPoint]{
-    
-    let tuple = getRadiusAndAngle(center: center, basePoint: basePoint, quadrant: quadrant)
-    
-    let newAngles = [tuple.angle + TETRADIC_ANGLE_OFFSET,
-                     tuple.angle + TETRADIC_ANGLE_OFFSET*2,
-                     tuple.angle + TETRADIC_ANGLE_OFFSET*3
-    ]
-    
-    var newPoints:[CGPoint] = []
-    
-    for angle in newAngles {
-        newPoints.append(getPointFromAngleAndRadius(angle: angle, radius: tuple.radius, center: center))
-    }
-    return newPoints
-}
-
 func getOriginsForColorHarmony(center:CGPoint, basePoint:CGPoint,quadrant:Quadrant, harmony:ColorHarmony) -> [CGPoint]{
     
     let tuple = getRadiusAndAngle(center: center, basePoint: basePoint, quadrant: quadrant)
@@ -191,5 +148,5 @@ func getPointFromAngleAndRadius(angle:CGFloat,radius:CGFloat, center:CGPoint) ->
     default:
         return CGPoint(x: 0, y: 0)
     }
-    
 }
+

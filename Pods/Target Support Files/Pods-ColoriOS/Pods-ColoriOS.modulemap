@@ -1,0 +1,6 @@
+module Pods_ColoriOS {
+  umbrella header "Pods-ColoriOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
