@@ -34,7 +34,17 @@ class ColorWheelViewController: UIViewController, UICollectionViewDelegate, UICo
     
     private var selectorsArray:[ColorSelectorView] = []
     
-    private var baseSelector:ColorSelectorView? = nil
+    private var baseSelector:ColorSelectorView? = nil {
+        didSet{
+            for selector in self.selectorsArray {
+                if selector != self.baseSelector {
+                    selector.layer.borderWidth = 2
+                } else {
+                    self.baseSelector!.layer.borderWidth = 3
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
 
@@ -63,25 +73,28 @@ class ColorWheelViewController: UIViewController, UICollectionViewDelegate, UICo
                     y: viewToDrag.center.y + translation.y
                 )
                 
-                let testView = UIView()
-                testView.center = newCenterPoint
-
                 let newQuadarant = self.colorWheelView.quadrantInView(viewCenter: newCenterPoint)
                 
                 let newRadiusAngle = getRadiusAndAngle(
                     center: colorWheelView.center,
-                    basePoint: testView.center,
+                    basePoint: newCenterPoint,
                     quadrant: newQuadarant)
+                
+                let newTruePoint = getPointFromAngleAndRadius(
+                    angle: newRadiusAngle.angle,
+                    radius: min(self.colorWheelView.frame.width/2-0.5,newRadiusAngle.radius),
+                    center: self.colorWheelView.center)
+                
                 
                 if newRadiusAngle.radius < (self.colorWheelView.frame.width/2) {
                     sender.setTranslation(CGPoint(x: 0, y: 0), in: viewToDrag)
-                    viewToDrag.color = self.colorWheelView.getPixelColorAt(point: testView.center)
-                    viewToDrag.center = newCenterPoint
+                    viewToDrag.color = self.colorWheelView.getPixelColorAt(point: newTruePoint)
+                    viewToDrag.center = newTruePoint
                     self.baseSelector = viewToDrag
                     
                     let radiusChange = initialRadiusAngle.radius - newRadiusAngle.radius
                     let angleChange = initialRadiusAngle.angle - newRadiusAngle.angle
-                    print("\(radiusChange) ___ \(angleChange)")
+                    
                     if lockSlider.isOn{
                         for selector in selectorsArray {
                             if selector != baseSelector {
@@ -93,7 +106,7 @@ class ColorWheelViewController: UIViewController, UICollectionViewDelegate, UICo
                                 
                                 let newSelectorPoint = getPointFromAngleAndRadius(
                                     angle: selectorRadiusAngle.angle - angleChange,
-                                    radius: selectorRadiusAngle.radius - radiusChange,
+                                    radius: min(self.colorWheelView.frame.width/2-0.5,selectorRadiusAngle.radius - radiusChange),
                                     center: self.colorWheelView.center)
                                 
                                 selector.center = newSelectorPoint
@@ -171,17 +184,42 @@ class ColorWheelViewController: UIViewController, UICollectionViewDelegate, UICo
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return self.selectorsArray.count
+        return self.selectorsArray.count + 1
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? ColorOutputCell {
+
+        if indexPath.row < self.selectorsArray.count, let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? ColorOutputCell {
             cell.backgroundColor = self.selectorsArray[indexPath.row].color
             cell.hexLabel.text = self.selectorsArray[indexPath.row].color.hex
+            
+            if self.selectorsArray[indexPath.row] == self.baseSelector {
+                cell.layer.borderWidth = 3
+            } else {
+                cell.layer.borderWidth = 2
+            }
+            
             return cell
         } else {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) 
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "AddCell", for: indexPath)
         }
+        
+    }
+    
+    /* */
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            if cell.reuseIdentifier == "AddCell" {
+                self.renderNewSelectorView()
+            } else if cell.reuseIdentifier == reuseIdentifier {
+                self.baseSelector = self.selectorsArray[indexPath.row]
+            }
+            
+            self.collectionView.reloadData()
+            
+        }
+        
         
     }
 }

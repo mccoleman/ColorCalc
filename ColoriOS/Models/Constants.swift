@@ -126,7 +126,7 @@ func getRadiusAndAngle(center:CGPoint, basePoint:CGPoint,quadrant:Quadrant) -> (
         initialAngle = ((acos(height/radius)*180)/CGFloat.pi) + 90*CGFloat(quadrant.rawValue-1)
     }
     
-    return (radius,initialAngle)
+    return (radius,initialAngle.isNaN ? 0.0 : initialAngle)
 }
 
 func getPointFromAngleAndRadius(angle:CGFloat,radius:CGFloat, center:CGPoint) -> CGPoint {
