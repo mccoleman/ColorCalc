@@ -40,16 +40,16 @@ extension UIImageView {
 }
 
 extension UIView {
-    func quadrantInView(view:UIView) -> Quadrant{
+    func quadrantInView(viewCenter:CGPoint) -> Quadrant{
         
-        if self.bounds.contains(view.center) {
-            if view.center.x > self.center.x {
-                if view.center.y < self.center.y{
+        if self.bounds.contains(viewCenter) {
+            if viewCenter.x > self.center.x {
+                if viewCenter.y < self.center.y{
                     return .I
                 }
                 return .IV
             } else {
-                if view.center.y < self.center.y{
+                if viewCenter.y < self.center.y{
                     return .II
                 }
                 return .III
@@ -59,9 +59,21 @@ extension UIView {
     }
 }
 
-extension CGRect {
-    func containsWholeRect(rect:CGRect){
-        
+extension UIColor{
+    var hex:String {
+        get{
+            if let values = self.cgColor.components, values.count >= 3 {
+                let r: CGFloat = values[0]
+                let g: CGFloat = values[1]
+                let b: CGFloat = values[2]
+
+                let hexString = String.init(format: "#%02lX%02lX%02lX", lroundf(Float(r * 255)), lroundf(Float(g * 255)), lroundf(Float(b * 255)))
+                return hexString
+            } else {
+                return "#000000"
+            }
+        }
     }
 }
+
 

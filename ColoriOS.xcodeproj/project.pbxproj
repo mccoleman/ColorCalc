@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		8CA7EB4C0F427CF7FCF474AF /* libPods-ColoriOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71BAAF533F98311DE6ADE5D8 /* libPods-ColoriOS.a */; };
+		C0392A112550FF0800C80814 /* HueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0392A102550FF0800C80814 /* HueView.swift */; };
+		C0392A2C2551F3DB00C80814 /* ColorOutputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0392A2B2551F3DB00C80814 /* ColorOutputCell.swift */; };
 		C03949ED254B130F00271E20 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03949EC254B130F00271E20 /* Constants.swift */; };
-		C052C32A2463302600CCEB45 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052C3292463302600CCEB45 /* ColorCell.swift */; };
+		C04BE5292550ABE000BDD94B /* ColorPalettesViewControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04BE5282550ABE000BDD94B /* ColorPalettesViewControllerTableViewController.swift */; };
 		C052C32C2464768A00CCEB45 /* ColorWheelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052C32B2464768A00CCEB45 /* ColorWheelViewController.swift */; };
 		C05D179A2549BF5B00F92079 /* ColorWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05D17992549BF5B00F92079 /* ColorWheelView.swift */; };
 		C05D179C2549F84900F92079 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05D179B2549F84900F92079 /* Extensions.swift */; };
@@ -47,8 +49,10 @@
 		71BAAF533F98311DE6ADE5D8 /* libPods-ColoriOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ColoriOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		831AF86681E825086F45F2F0 /* Pods-ColoriOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColoriOS.debug.xcconfig"; path = "Target Support Files/Pods-ColoriOS/Pods-ColoriOS.debug.xcconfig"; sourceTree = "<group>"; };
 		B08CC3391F460A9A81607256 /* Pods-ColoriOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColoriOS.release.xcconfig"; path = "Target Support Files/Pods-ColoriOS/Pods-ColoriOS.release.xcconfig"; sourceTree = "<group>"; };
+		C0392A102550FF0800C80814 /* HueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HueView.swift; sourceTree = "<group>"; };
+		C0392A2B2551F3DB00C80814 /* ColorOutputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorOutputCell.swift; sourceTree = "<group>"; };
 		C03949EC254B130F00271E20 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		C052C3292463302600CCEB45 /* ColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
+		C04BE5282550ABE000BDD94B /* ColorPalettesViewControllerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalettesViewControllerTableViewController.swift; sourceTree = "<group>"; };
 		C052C32B2464768A00CCEB45 /* ColorWheelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWheelViewController.swift; sourceTree = "<group>"; };
 		C05D17992549BF5B00F92079 /* ColorWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWheelView.swift; sourceTree = "<group>"; };
 		C05D179B2549F84900F92079 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -127,8 +131,10 @@
 			isa = PBXGroup;
 			children = (
 				C05D17992549BF5B00F92079 /* ColorWheelView.swift */,
+				C0392A2B2551F3DB00C80814 /* ColorOutputCell.swift */,
 				C05D179D2549F8D000F92079 /* ColorSelectorView.swift */,
 				C0BD6206254E02BC00A156F1 /* ColorOutputView.swift */,
+				C0392A102550FF0800C80814 /* HueView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -138,6 +144,7 @@
 			children = (
 				C052C32B2464768A00CCEB45 /* ColorWheelViewController.swift */,
 				C0A19915246323FC00166095 /* ImageChoiceViewController.swift */,
+				C04BE5282550ABE000BDD94B /* ColorPalettesViewControllerTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -172,7 +179,6 @@
 				C03949EA254B12CE00271E20 /* Models */,
 				C0A19911246323FC00166095 /* AppDelegate.swift */,
 				C0A19913246323FC00166095 /* SceneDelegate.swift */,
-				C052C3292463302600CCEB45 /* ColorCell.swift */,
 				C0A19917246323FC00166095 /* Main.storyboard */,
 				C0A1991D246323FD00166095 /* Assets.xcassets */,
 				C0A1991F246323FD00166095 /* LaunchScreen.storyboard */,
@@ -361,12 +367,14 @@
 				C0A19916246323FC00166095 /* ImageChoiceViewController.swift in Sources */,
 				C0A19912246323FC00166095 /* AppDelegate.swift in Sources */,
 				C0A19914246323FC00166095 /* SceneDelegate.swift in Sources */,
+				C0392A2C2551F3DB00C80814 /* ColorOutputCell.swift in Sources */,
 				C05D179C2549F84900F92079 /* Extensions.swift in Sources */,
+				C0392A112550FF0800C80814 /* HueView.swift in Sources */,
 				C03949ED254B130F00271E20 /* Constants.swift in Sources */,
 				C05D179A2549BF5B00F92079 /* ColorWheelView.swift in Sources */,
 				C0BD6207254E02BC00A156F1 /* ColorOutputView.swift in Sources */,
-				C052C32A2463302600CCEB45 /* ColorCell.swift in Sources */,
 				C052C32C2464768A00CCEB45 /* ColorWheelViewController.swift in Sources */,
+				C04BE5292550ABE000BDD94B /* ColorPalettesViewControllerTableViewController.swift in Sources */,
 				C0A1991C246323FC00166095 /* ColoriOS.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,18 +13,26 @@ class ColorOutputView: UIView {
     var color:UIColor{
         didSet{
             self.backgroundColor = color
+            self.hexReadout.text = "\(color.hex)"
         }
     }
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
+    
+    var hexReadout:UILabel = UILabel()
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         self.layer.borderWidth = 2
+        self.hexReadout.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 30)
+        self.hexReadout.textAlignment = .center
+        self.hexReadout.backgroundColor = UIColor.black
+        self.hexReadout.textColor = UIColor.white
+        self.addSubview(self.hexReadout)
     }
     
    init(frame: CGRect, color:UIColor) {
         self.color = color
         super.init(frame: frame)
+        self.backgroundColor = color
     }
     
     override init(frame: CGRect) {

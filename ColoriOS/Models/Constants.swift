@@ -14,6 +14,8 @@ let TRIADIC_ANGLE_OFFSET:CGFloat = 120
 let TETRADIC_ANGLE_OFFSET:CGFloat = 90
 let SPLIT_ANGLE_OFFSET:CGFloat = 30
 let OPPOSITE_ANGLE_OFFSET:CGFloat = 180
+let SELECTOR_SIZE:CGFloat = 20
+let MONO_RADIUS_DELTA:CGFloat = 40
 
 enum ColorHarmony:Int{
     case None=0,Complementary,Mono,Analogous,Split,Triadic,Tetradic
@@ -70,6 +72,7 @@ func getOriginsForColorHarmony(center:CGPoint, basePoint:CGPoint,quadrant:Quadra
                     tuple.angle - ANALOGOUS_ANGLE_OFFSET
         ]
     case .Mono:
+        newAngles = [tuple.angle]
         break
     case .Split:
         newAngles = [tuple.angle + OPPOSITE_ANGLE_OFFSET - SPLIT_ANGLE_OFFSET,
@@ -93,7 +96,11 @@ func getOriginsForColorHarmony(center:CGPoint, basePoint:CGPoint,quadrant:Quadra
     var newPoints:[CGPoint] = []
     
     for angle in newAngles {
-        newPoints.append(getPointFromAngleAndRadius(angle: angle, radius: tuple.radius, center: center))
+        newPoints.append(
+            getPointFromAngleAndRadius(
+                angle: angle,
+                radius: harmony  != .Mono ? tuple.radius : max(0,tuple.radius - MONO_RADIUS_DELTA),
+                center: center))
     }
     return newPoints
 }
@@ -127,7 +134,7 @@ func getPointFromAngleAndRadius(angle:CGFloat,radius:CGFloat, center:CGPoint) ->
     case 0...90: //height: sin width: cos
         let width = getLengthFromAngleAndRadiusSin(angle: angle, radius: radius)
         let height = getLengthFromAngleAndRadiusCos(angle: angle, radius: radius)
-        return (CGPoint(x: center.x + width , y: center.y - height))
+        return (CGPoint(x: center.x + width, y: center.y - height))
     case 90...180://height: cos width: sin
         let angleInQuadrant = angle - 90
         let width = getLengthFromAngleAndRadiusCos(angle: angleInQuadrant, radius: radius)

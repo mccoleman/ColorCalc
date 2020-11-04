@@ -10,13 +10,7 @@ import UIKit
 
 class ColorSelectorView: UIView {
     
-    var colorOutput:ColorOutputView
-    
-    var color:UIColor {
-        didSet{
-            self.colorOutput.backgroundColor = color
-        }
-    }
+    var color:UIColor
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -25,25 +19,11 @@ class ColorSelectorView: UIView {
     }
 
     override init(frame: CGRect) {
-        self.colorOutput = ColorOutputView(frame:CGRect(
-            x: 0,
-            y: 0,
-            width: 50,
-            height: 50)
-        )
-
         self.color = UIColor.white
         super.init(frame: frame)
     }
     
     init(frame:CGRect,color:UIColor){
-        self.colorOutput = ColorOutputView(frame:CGRect(
-            x: 0,
-            y: 0,
-            width: 50,
-            height: 50)
-        )
-
         self.color = color
         super.init(frame: frame)
     }

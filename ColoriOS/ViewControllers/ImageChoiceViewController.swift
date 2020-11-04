@@ -59,7 +59,7 @@ class ImageChoiceViewController: UIViewController, UIImagePickerControllerDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row <= palette.count {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCell", for: indexPath) as? ColorCell {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCell", for: indexPath) as? ColorOutputCell {
                 cell.color = palette[indexPath.row].makeUIColor()
                 cell.backgroundColor = cell.color
                 return cell
