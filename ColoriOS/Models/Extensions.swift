@@ -11,6 +11,7 @@ import UIKit
 
 
 extension UIImageView {
+    /* Picked up this color func from https://noahgilmore.com/blog/cifilter-colorwheel/ */
     func getPixelColorAt(point: CGPoint) -> UIColor {
         let pixel = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: 4)
         let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -74,6 +75,19 @@ extension UIColor{
             }
         }
     }
+    
+    public func colorWithBrightness(brightness: CGFloat) -> UIColor {
+           var H: CGFloat = 0, S: CGFloat = 0, B: CGFloat = 0, A: CGFloat = 0
+           
+           if getHue(&H, saturation: &S, brightness: &B, alpha: &A) {
+               B += (brightness - 1.0)
+               B = max(min(B, 1.0), 0.0)
+               
+               return UIColor(hue: H, saturation: S, brightness: B, alpha: A)
+           }
+           
+           return self
+       }
 }
 
 

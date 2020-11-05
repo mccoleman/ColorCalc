@@ -309,14 +309,29 @@
                                     <outlet property="delegate" destination="j38-RN-51z" id="ZJ2-tB-gbW"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bev-cm-ERI">
+                                <rect key="frame" x="5" y="627" width="15" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="oIB-rk-GuB"/>
+                                    <constraint firstAttribute="height" constant="50" id="uQO-Dl-2ys"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ru7-ON-Pwg"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="Bev-cm-ERI" firstAttribute="centerY" secondItem="7vh-1s-UkJ" secondAttribute="centerY" id="3oT-Qc-L2i"/>
                             <constraint firstItem="uJp-lb-IqQ" firstAttribute="centerX" secondItem="Ru7-ON-Pwg" secondAttribute="centerX" id="7Jg-pL-xBE"/>
                             <constraint firstItem="7vh-1s-UkJ" firstAttribute="top" secondItem="2Go-xU-CZQ" secondAttribute="bottom" constant="16" id="CPE-bI-EnO"/>
                             <constraint firstItem="Ru7-ON-Pwg" firstAttribute="bottom" secondItem="XsH-gw-d81" secondAttribute="bottom" constant="1" id="G6r-Qr-KbN"/>
                             <constraint firstItem="2Go-xU-CZQ" firstAttribute="leading" secondItem="Ru7-ON-Pwg" secondAttribute="leading" constant="5" id="IIx-iC-e3B"/>
+                            <constraint firstItem="Ru7-ON-Pwg" firstAttribute="trailing" secondItem="Bev-cm-ERI" secondAttribute="trailing" constant="354" id="Idt-7r-FiY"/>
                             <constraint firstItem="uJp-lb-IqQ" firstAttribute="top" secondItem="7vh-1s-UkJ" secondAttribute="bottom" constant="8" symbolic="YES" id="PJM-2F-GLW"/>
                             <constraint firstItem="uJp-lb-IqQ" firstAttribute="width" secondItem="QjM-I4-a59" secondAttribute="width" multiplier="0.997326" id="QqS-3r-ORk"/>
                             <constraint firstItem="uJp-lb-IqQ" firstAttribute="firstBaseline" secondItem="7vh-1s-UkJ" secondAttribute="baseline" constant="25.5" symbolType="layoutAnchor" id="QxY-8Y-pgi"/>
@@ -332,6 +347,7 @@
                         <outlet property="colorWheelView" destination="AEG-aB-zOB" id="4gj-9D-IkN"/>
                         <outlet property="complementaryButton" destination="XsH-gw-d81" id="nAk-SX-bji"/>
                         <outlet property="containerView" destination="2Go-xU-CZQ" id="vqB-Wq-Zt4"/>
+                        <outlet property="hueSlider" destination="Bev-cm-ERI" id="tBK-BO-viX"/>
                         <outlet property="lockSlider" destination="05b-23-8gs" id="Fxf-8y-hZF"/>
                         <outlet property="monoButton" destination="chP-Qb-TIG" id="h8K-j6-6zr"/>
                         <outlet property="splitButton" destination="a3L-TO-VLp" id="drh-tN-6JW"/>
@@ -340,11 +356,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MU7-7Y-KZw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="WLI-r8-zwq">
-                    <connections>
-                        <action selector="panView:" destination="j38-RN-51z" id="0Jb-DS-lUV"/>
-                    </connections>
-                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1679.7101449275362" y="71.316964285714278"/>
         </scene>

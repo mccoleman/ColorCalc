@@ -25,15 +25,16 @@ class ColorWheelViewController: UIViewController, UICollectionViewDelegate, UICo
    @IBOutlet var collectionView:UICollectionView!
     
     @IBOutlet var lockSlider:UISwitch!
+    
+    @IBOutlet var hueSlider:UIView!
 
     private let reuseIdentifier = "Cell"
-    
     private var harmonyState:ColorHarmony = .None
-    
     private let panGestureRecognizer:UIPanGestureRecognizer = UIPanGestureRecognizer()
     
+    private var brightness:CGFloat = 1.0
     private var selectorsArray:[ColorSelectorView] = []
-    
+   
     private var baseSelector:ColorSelectorView? = nil {
         didSet{
             for selector in self.selectorsArray {
@@ -43,6 +44,7 @@ class ColorWheelViewController: UIViewController, UICollectionViewDelegate, UICo
                     self.baseSelector!.layer.borderWidth = 3
                 }
             }
+            self.colorHueView.color = self.baseSelector!.color//.colorWithBrightness(brightness: self.brightness)
         }
     }
     
@@ -51,12 +53,13 @@ class ColorWheelViewController: UIViewController, UICollectionViewDelegate, UICo
         self.colorWheelView.renderColorWheel()
         super.viewDidLoad()
         self.renderNewSelectorView()
-        self.colorHueView!.buildGradientLayer()
-        // Do any additional setup after loading the view.
+        self.colorHueView.buildGradientLayer()
+        let sliderGesture = UIPanGestureRecognizer(target: self, action:(#selector(self.panHueSlider(_:))))
+        self.hueSlider.addGestureRecognizer(sliderGesture)
     }
     
 
-    @IBAction func panView(_ sender: UIPanGestureRecognizer) {
+    @objc func panColorWheelView(_ sender: UIPanGestureRecognizer) {
         
         let translation = sender.translation(in: self.view)
         
@@ -69,32 +72,32 @@ class ColorWheelViewController: UIViewController, UICollectionViewDelegate, UICo
                     quadrant: self.colorWheelView.quadrantInView(viewCenter: viewToDrag.center))
                 
                 let newCenterPoint = CGPoint(
-                    x: viewToDrag.center.x + translation.x,
+                    x: abs(viewToDrag.center.x + translation.x),
                     y: viewToDrag.center.y + translation.y
                 )
                 
                 let newQuadarant = self.colorWheelView.quadrantInView(viewCenter: newCenterPoint)
                 
-                let newRadiusAngle = getRadiusAndAngle(
+                var newRadiusAngle = getRadiusAndAngle(
                     center: colorWheelView.center,
                     basePoint: newCenterPoint,
                     quadrant: newQuadarant)
                 
+                newRadiusAngle.radius = min(self.colorWheelView.frame.width/2-0.5,newRadiusAngle.radius)
+                
                 let newTruePoint = getPointFromAngleAndRadius(
                     angle: newRadiusAngle.angle,
-                    radius: min(self.colorWheelView.frame.width/2-0.5,newRadiusAngle.radius),
+                    radius: newRadiusAngle.radius,
                     center: self.colorWheelView.center)
-                
                 
                 if newRadiusAngle.radius < (self.colorWheelView.frame.width/2) {
                     sender.setTranslation(CGPoint(x: 0, y: 0), in: viewToDrag)
-                    viewToDrag.color = self.colorWheelView.getPixelColorAt(point: newTruePoint)
+                    viewToDrag.color = self.colorWheelView.getPixelColorAt(point: newTruePoint)//.colorWithBrightness(brightness: self.brightness)
                     viewToDrag.center = newTruePoint
                     self.baseSelector = viewToDrag
-                    
                     let radiusChange = initialRadiusAngle.radius - newRadiusAngle.radius
                     let angleChange = initialRadiusAngle.angle - newRadiusAngle.angle
-                    
+                        
                     if lockSlider.isOn{
                         for selector in selectorsArray {
                             if selector != baseSelector {
@@ -110,7 +113,7 @@ class ColorWheelViewController: UIViewController, UICollectionViewDelegate, UICo
                                     center: self.colorWheelView.center)
                                 
                                 selector.center = newSelectorPoint
-                                selector.color = self.colorWheelView.getPixelColorAt(point: selector.center)
+                                selector.color = self.colorWheelView.getPixelColorAt(point: selector.center)//.colorWithBrightness(brightness: self.brightness)
                             }
                         }
                         self.colorHueView.color = viewToDrag.color
@@ -120,6 +123,38 @@ class ColorWheelViewController: UIViewController, UICollectionViewDelegate, UICo
             }
             
         }
+    }
+    
+    @objc func panHueSlider(_ sender:UIPanGestureRecognizer) {
+        let translation = sender.translation(in: self.view)
+        
+        if sender.view == self.hueSlider {
+            let newCenter = CGPoint(
+                x: self.hueSlider.center.x + translation.x,
+                y: self.hueSlider.center.y
+            )
+            
+            
+            let xposition:CGFloat = self.hueSlider.convert(newCenter, to: colorHueView).x
+               
+            if xposition >= 0.0 && xposition <= colorHueView.bounds.width*2 {
+                
+                self.hueSlider.center = newCenter
+                
+                sender.setTranslation(CGPoint(x: 0, y: 0), in: self.hueSlider)
+                
+                self.brightness = 1-(xposition/(colorHueView.bounds.width*2))
+                
+                if let baseSelector = self.baseSelector {
+                    self.hueSlider.backgroundColor = baseSelector.color
+                }
+                
+                self.collectionView.reloadData()
+            }
+            
+            
+        }
+        
     }
     
     @IBAction func harmonySelected(sender: UIButton){
@@ -140,7 +175,7 @@ class ColorWheelViewController: UIViewController, UICollectionViewDelegate, UICo
                         width: SELECTOR_SIZE,
                         height: SELECTOR_SIZE
                     ),
-                    color: self.colorWheelView.getPixelColorAt(point: point)
+                    color: self.colorWheelView.getPixelColorAt(point: point)//.colorWithBrightness(brightness:self.brightness)
                 )
 
                 self.addColorSelectorPanRecognizer(colorSelector: newColorSector)
@@ -165,11 +200,12 @@ class ColorWheelViewController: UIViewController, UICollectionViewDelegate, UICo
         self.addColorSelectorPanRecognizer(colorSelector: newColorSector)
         self.selectorsArray.append(newColorSector)
         self.colorWheelView.addSubview(newColorSector)
+        self.baseSelector = newColorSector
     }
     
 
     func addColorSelectorPanRecognizer(colorSelector:ColorSelectorView){
-        let panGesture = UIPanGestureRecognizer(target: self, action:(#selector(self.panView(_:))))
+        let panGesture = UIPanGestureRecognizer(target: self, action:(#selector(self.panColorWheelView(_:))))
         colorSelector.addGestureRecognizer(panGesture)
     }
     
@@ -217,9 +253,7 @@ class ColorWheelViewController: UIViewController, UICollectionViewDelegate, UICo
             }
             
             self.collectionView.reloadData()
-            
+
         }
-        
-        
     }
 }
