@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ColorGroup" representedClassName="ColorGroup" syncable="YES">
+        <attribute name="colorHarmony" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="childColorOptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ColorOption"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ColorOption" inverseName="colorGroup" inverseEntity="ColorOption"/>
+    </entity>
+    <entity name="ColorOption" representedClassName="ColorOption" syncable="YES">
+        <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="hexString" optional="YES" attributeType="String"/>
+        <relationship name="colorGroup" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ColorGroup" inverseName="parent" inverseEntity="ColorGroup"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ColorPallette" inverseName="colorOptions" inverseEntity="ColorPallette"/>
+    </entity>
+    <entity name="ColorPallette" representedClassName="ColorPallette" syncable="YES">
+        <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="colorOptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ColorOption" inverseName="owner" inverseEntity="ColorOption"/>
+    </entity>
 </model>

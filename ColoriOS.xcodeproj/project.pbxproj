@@ -16,8 +16,6 @@
 		C05D179A2549BF5B00F92079 /* ColorWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05D17992549BF5B00F92079 /* ColorWheelView.swift */; };
 		C05D179C2549F84900F92079 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05D179B2549F84900F92079 /* Extensions.swift */; };
 		C05D179E2549F8D000F92079 /* ColorSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05D179D2549F8D000F92079 /* ColorSelectorView.swift */; };
-		C0A19912246323FC00166095 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19911246323FC00166095 /* AppDelegate.swift */; };
-		C0A19914246323FC00166095 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19913246323FC00166095 /* SceneDelegate.swift */; };
 		C0A19916246323FC00166095 /* ImageChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19915246323FC00166095 /* ImageChoiceViewController.swift */; };
 		C0A19919246323FC00166095 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0A19917246323FC00166095 /* Main.storyboard */; };
 		C0A1991C246323FC00166095 /* ColoriOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C0A1991A246323FC00166095 /* ColoriOS.xcdatamodeld */; };
@@ -25,6 +23,17 @@
 		C0A19921246323FD00166095 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0A1991F246323FD00166095 /* LaunchScreen.storyboard */; };
 		C0A1992C246323FD00166095 /* ColoriOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1992B246323FD00166095 /* ColoriOSTests.swift */; };
 		C0A19937246323FD00166095 /* ColoriOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19936246323FD00166095 /* ColoriOSUITests.swift */; };
+		C0AD4A802A3A486F00401DE8 /* ColorPaletteSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4A7F2A3A486F00401DE8 /* ColorPaletteSelection.swift */; };
+		C0AD4AE12A41349A00401DE8 /* ColorGroup+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4ADB2A41349A00401DE8 /* ColorGroup+CoreDataClass.swift */; };
+		C0AD4AE22A41349A00401DE8 /* ColorGroup+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4ADC2A41349A00401DE8 /* ColorGroup+CoreDataProperties.swift */; };
+		C0AD4AE32A41349A00401DE8 /* ColorOption+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4ADD2A41349A00401DE8 /* ColorOption+CoreDataClass.swift */; };
+		C0AD4AE42A41349A00401DE8 /* ColorOption+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4ADE2A41349A00401DE8 /* ColorOption+CoreDataProperties.swift */; };
+		C0AD4AE52A41349A00401DE8 /* ColorPallette+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4ADF2A41349A00401DE8 /* ColorPallette+CoreDataClass.swift */; };
+		C0AD4AE62A41349A00401DE8 /* ColorPallette+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4AE02A41349A00401DE8 /* ColorPallette+CoreDataProperties.swift */; };
+		C0AD4AE92A41422E00401DE8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4AE82A41422E00401DE8 /* DataManager.swift */; };
+		C0AD4AEB2A4147A100401DE8 /* ColorWheelVCRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4AEA2A4147A100401DE8 /* ColorWheelVCRepresentable.swift */; };
+		C0AD4AED2A4149C900401DE8 /* ColoriOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4AEC2A4149C900401DE8 /* ColoriOSApp.swift */; };
+		C0AD4B2A2A4150A600401DE8 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4B292A4150A600401DE8 /* Persistence.swift */; };
 		C0BD6207254E02BC00A156F1 /* ColorOutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BD6206254E02BC00A156F1 /* ColorOutputView.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,8 +67,6 @@
 		C05D179B2549F84900F92079 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C05D179D2549F8D000F92079 /* ColorSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectorView.swift; sourceTree = "<group>"; };
 		C0A1990E246323FC00166095 /* ColoriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColoriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C0A19911246323FC00166095 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C0A19913246323FC00166095 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C0A19915246323FC00166095 /* ImageChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageChoiceViewController.swift; sourceTree = "<group>"; };
 		C0A19918246323FC00166095 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C0A1991B246323FC00166095 /* ColoriOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ColoriOS.xcdatamodel; sourceTree = "<group>"; };
@@ -72,6 +79,17 @@
 		C0A19932246323FD00166095 /* ColoriOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColoriOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0A19936246323FD00166095 /* ColoriOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoriOSUITests.swift; sourceTree = "<group>"; };
 		C0A19938246323FD00166095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0AD4A7F2A3A486F00401DE8 /* ColorPaletteSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteSelection.swift; sourceTree = "<group>"; };
+		C0AD4ADB2A41349A00401DE8 /* ColorGroup+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorGroup+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		C0AD4ADC2A41349A00401DE8 /* ColorGroup+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorGroup+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		C0AD4ADD2A41349A00401DE8 /* ColorOption+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorOption+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		C0AD4ADE2A41349A00401DE8 /* ColorOption+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorOption+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		C0AD4ADF2A41349A00401DE8 /* ColorPallette+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorPallette+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		C0AD4AE02A41349A00401DE8 /* ColorPallette+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorPallette+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		C0AD4AE82A41422E00401DE8 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		C0AD4AEA2A4147A100401DE8 /* ColorWheelVCRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWheelVCRepresentable.swift; sourceTree = "<group>"; };
+		C0AD4AEC2A4149C900401DE8 /* ColoriOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoriOSApp.swift; sourceTree = "<group>"; };
+		C0AD4B292A4150A600401DE8 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		C0BD6206254E02BC00A156F1 /* ColorOutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOutputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,6 +139,12 @@
 		C03949EA254B12CE00271E20 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C0AD4ADB2A41349A00401DE8 /* ColorGroup+CoreDataClass.swift */,
+				C0AD4ADC2A41349A00401DE8 /* ColorGroup+CoreDataProperties.swift */,
+				C0AD4ADD2A41349A00401DE8 /* ColorOption+CoreDataClass.swift */,
+				C0AD4ADE2A41349A00401DE8 /* ColorOption+CoreDataProperties.swift */,
+				C0AD4ADF2A41349A00401DE8 /* ColorPallette+CoreDataClass.swift */,
+				C0AD4AE02A41349A00401DE8 /* ColorPallette+CoreDataProperties.swift */,
 				C03949EC254B130F00271E20 /* TrigFunctions.swift */,
 				C05D179B2549F84900F92079 /* Extensions.swift */,
 			);
@@ -174,11 +198,12 @@
 		C0A19910246323FC00166095 /* ColoriOS */ = {
 			isa = PBXGroup;
 			children = (
+				C0AD4AEC2A4149C900401DE8 /* ColoriOSApp.swift */,
+				C0AD4A7E2A3A480600401DE8 /* SwiftUI */,
 				C03949F4254B138E00271E20 /* ViewControllers */,
 				C03949EB254B12DC00271E20 /* Views */,
+				C0AD4AE72A41421600401DE8 /* Managers */,
 				C03949EA254B12CE00271E20 /* Models */,
-				C0A19911246323FC00166095 /* AppDelegate.swift */,
-				C0A19913246323FC00166095 /* SceneDelegate.swift */,
 				C0A19917246323FC00166095 /* Main.storyboard */,
 				C0A1991D246323FD00166095 /* Assets.xcassets */,
 				C0A1991F246323FD00166095 /* LaunchScreen.storyboard */,
@@ -204,6 +229,24 @@
 				C0A19938246323FD00166095 /* Info.plist */,
 			);
 			path = ColoriOSUITests;
+			sourceTree = "<group>";
+		};
+		C0AD4A7E2A3A480600401DE8 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				C0AD4A7F2A3A486F00401DE8 /* ColorPaletteSelection.swift */,
+				C0AD4AEA2A4147A100401DE8 /* ColorWheelVCRepresentable.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		C0AD4AE72A41421600401DE8 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				C0AD4AE82A41422E00401DE8 /* DataManager.swift */,
+				C0AD4B292A4150A600401DE8 /* Persistence.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,15 +408,24 @@
 			files = (
 				C05D179E2549F8D000F92079 /* ColorSelectorView.swift in Sources */,
 				C0A19916246323FC00166095 /* ImageChoiceViewController.swift in Sources */,
-				C0A19912246323FC00166095 /* AppDelegate.swift in Sources */,
-				C0A19914246323FC00166095 /* SceneDelegate.swift in Sources */,
 				C0392A2C2551F3DB00C80814 /* ColorOutputCell.swift in Sources */,
+				C0AD4AE12A41349A00401DE8 /* ColorGroup+CoreDataClass.swift in Sources */,
 				C05D179C2549F84900F92079 /* Extensions.swift in Sources */,
 				C0392A112550FF0800C80814 /* HueView.swift in Sources */,
+				C0AD4AE52A41349A00401DE8 /* ColorPallette+CoreDataClass.swift in Sources */,
 				C03949ED254B130F00271E20 /* TrigFunctions.swift in Sources */,
+				C0AD4AE92A41422E00401DE8 /* DataManager.swift in Sources */,
+				C0AD4A802A3A486F00401DE8 /* ColorPaletteSelection.swift in Sources */,
 				C05D179A2549BF5B00F92079 /* ColorWheelView.swift in Sources */,
+				C0AD4B2A2A4150A600401DE8 /* Persistence.swift in Sources */,
 				C0BD6207254E02BC00A156F1 /* ColorOutputView.swift in Sources */,
 				C052C32C2464768A00CCEB45 /* ColorWheelViewController.swift in Sources */,
+				C0AD4AE62A41349A00401DE8 /* ColorPallette+CoreDataProperties.swift in Sources */,
+				C0AD4AE22A41349A00401DE8 /* ColorGroup+CoreDataProperties.swift in Sources */,
+				C0AD4AED2A4149C900401DE8 /* ColoriOSApp.swift in Sources */,
+				C0AD4AE42A41349A00401DE8 /* ColorOption+CoreDataProperties.swift in Sources */,
+				C0AD4AEB2A4147A100401DE8 /* ColorWheelVCRepresentable.swift in Sources */,
+				C0AD4AE32A41349A00401DE8 /* ColorOption+CoreDataClass.swift in Sources */,
 				C04BE5292550ABE000BDD94B /* ColorPalettesViewControllerTableViewController.swift in Sources */,
 				C0A1991C246323FC00166095 /* ColoriOS.xcdatamodeld in Sources */,
 			);
@@ -554,7 +606,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R42N6K4ZQL;
 				INFOPLIST_FILE = ColoriOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -574,7 +626,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R42N6K4ZQL;
 				INFOPLIST_FILE = ColoriOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

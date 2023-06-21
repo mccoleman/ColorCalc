@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ColorWheelViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ColorWheelViewController: UIViewController {
 
     @IBOutlet var colorWheelView:ColorWheelView!
     @IBOutlet var containerView:UIView!
@@ -209,9 +209,9 @@ class ColorWheelViewController: UIViewController, UICollectionViewDelegate, UICo
         colorSelector.addGestureRecognizer(panGesture)
     }
     
-    
-    /*DATA SOURCE*/
+}
 
+extension ColorWheelViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -241,9 +241,9 @@ class ColorWheelViewController: UIViewController, UICollectionViewDelegate, UICo
         }
         
     }
-    
-    /* */
-    
+}
+
+extension ColorWheelViewController:UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) {
             if cell.reuseIdentifier == "AddCell" {

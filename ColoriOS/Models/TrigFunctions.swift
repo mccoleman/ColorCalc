@@ -17,7 +17,7 @@ let OPPOSITE_ANGLE_OFFSET:CGFloat = 180
 let SELECTOR_SIZE:CGFloat = 20
 let MONO_RADIUS_DELTA:CGFloat = 40
 
-enum ColorHarmony:Int{
+public enum ColorHarmony:Int{
     case None=0,Complementary,Mono,Analogous,Split,Triadic,Tetradic
 }
 enum Quadrant:Int {
