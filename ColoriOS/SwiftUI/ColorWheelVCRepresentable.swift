@@ -9,9 +9,14 @@
 import SwiftUI
 
 struct ColorWheelVCRepresentable: UIViewControllerRepresentable {
+    
+    let colorPalette: ColorPallette
+    
     func makeUIViewController(context: Context) -> ColorWheelViewController {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = mainStoryboard.instantiateViewController(identifier: "ColorWheelViewController") as! ColorWheelViewController
+        
+        vc.colorPalette = colorPalette
         return vc
     }
     

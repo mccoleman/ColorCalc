@@ -17,32 +17,6 @@ let OPPOSITE_ANGLE_OFFSET:CGFloat = 180
 let SELECTOR_SIZE:CGFloat = 20
 let MONO_RADIUS_DELTA:CGFloat = 40
 
-public enum ColorHarmony:Int{
-    case None=0,Complementary,Mono,Analogous,Split,Triadic,Tetradic
-}
-enum Quadrant:Int {
-    case  I=1, II, III, IV
-    
-    func getOpposite() -> Quadrant{
-        let truth:Int = (self.rawValue+2)%4
-        return ((truth != 0) ? Quadrant(rawValue: truth)! : .IV)
-    }
-    
-    func getQuadrantFromPoints(center:CGPoint, point:CGPoint) -> Quadrant{
-        if point.x > center.x {
-            if point.y < center.y{
-                return .I
-            }
-            return .IV
-        } else {
-            if point.y < center.y{
-                return .II
-            }
-            return .III
-        }
-    }
-}
-
 func complementaryOrigin(center:CGPoint, basePoint:CGPoint,quadrant:Quadrant) -> CGPoint {
     let width = abs(center.x - basePoint.x)
     let height = abs(center.y - basePoint.y)

@@ -13,19 +13,41 @@ struct ColorPaletteSelection: View {
     @FetchRequest(sortDescriptors: []) var colorPallettes: FetchedResults<ColorPallette>
     
     @State private var showingCreatePalletteAlert = false
-    @State private var showingColorWheelVC = false
+    @State private var showingCreateColorWheelVC = false
+    @State private var showingEditColorWheelVC = false
     @State private var newPalletteName = ""
+    @State var selectedColorPalette:ColorPallette?
     
     var body: some View {
         VStack {
             List {
-                ForEach(colorPallettes, id:\.self) { pallette in
-                    NavigationLink {
-                        ColorWheelVCRepresentable()
-                    } label: {
-                        Text(pallette.unwrappedTitle)
+                ForEach(colorPallettes, id:\.self) { palette in
+                    Button(palette.unwrappedTitle) {
+                        showingEditColorWheelVC.toggle()
                     }
-                }.onDelete(perform: deletePalettes)
+                    .tint(.black)
+                    .swipeActions(allowsFullSwipe: false) {
+                        Button(role: .destructive) {
+                            print("Delete")
+                           deletePalettes(colorPalette: palette)
+                        } label: {
+                            Label("Delete", systemImage: "trash.fill")
+                        }
+                        Button {
+                            print("Edit")
+                        } label: {
+                            Label("Edit", systemImage: "paintbrush")
+                        }
+                        .alert("Rename This Pallette", isPresented: $showingCreatePalletteAlert) {
+                            TextField(palette.unwrappedTitle, text: $newPalletteName)
+                            Button("Save and Create", action: renameSubmit)
+                        }
+                        .tint(.indigo)
+                    }
+                    .sheet(isPresented: $showingEditColorWheelVC) {
+                        ColorWheelVCRepresentable(colorPalette: palette)
+                    }
+                }
                 
             }
             Button("Create New Pallette"){
@@ -33,24 +55,34 @@ struct ColorPaletteSelection: View {
             }
             .alert("Name This Pallette", isPresented: $showingCreatePalletteAlert) {
                 TextField("Color Pallette #\(colorPallettes.count + 1)", text: $newPalletteName)
-                Button("Save and Create", action: submit)
+                Button("Save and Create", action: saveNameSubmit)
+            }
+            .sheet(isPresented: $showingCreateColorWheelVC, onDismiss: didDismssCreate) {
+                if let p = selectedColorPalette {
+                    ColorWheelVCRepresentable(colorPalette: p)
+                }
             }
         }
-        .sheet(isPresented: $showingColorWheelVC) {
-            ColorWheelVCRepresentable()
-        }
     }
     
-    func submit() {
+    func saveNameSubmit() {
         let pallette = ColorPallette(context: moc)
         pallette.title = newPalletteName
+        let colorOption = ColorOption(context: moc)
+        colorOption.hexString = "FFFFFF"
+        pallette.colorOptions = [colorOption]
         try? moc.save()
-        showingColorWheelVC.toggle()
+        selectedColorPalette = pallette
+        showingCreateColorWheelVC.toggle()
     }
     
-    private func deletePalettes(offsets: IndexSet) {
+    func didDismssCreate() {
+        selectedColorPalette = nil
+    }
+    
+    private func deletePalettes(colorPalette: ColorPallette) {
         withAnimation {
-            offsets.map { colorPallettes[$0] }.forEach(moc.delete)
+            moc.delete(colorPalette)
 
             do {
                 try moc.save()

@@ -27,6 +27,8 @@ class ColorWheelViewController: UIViewController {
     @IBOutlet var lockSlider:UISwitch!
     
     @IBOutlet var hueSlider:UIView!
+    
+    var colorPalette:ColorPallette!
 
     private let reuseIdentifier = "Cell"
     private var harmonyState:ColorHarmony = .None
@@ -49,7 +51,6 @@ class ColorWheelViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-
         self.colorWheelView.renderColorWheel()
         super.viewDidLoad()
         self.renderNewSelectorView()
