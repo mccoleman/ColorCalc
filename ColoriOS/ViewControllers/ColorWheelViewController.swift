@@ -169,13 +169,11 @@ class ColorWheelViewController: UIViewController {
                 quadrant: colorWheelView.quadrantInView(viewCenter: baseSelector.center),
                 harmony: harmony
             )
-            let _point = CGPoint(x: colorWheelView.center.x - (SELECTOR_SIZE/2),
-                                 y: colorWheelView.center.y - (SELECTOR_SIZE/2))
             for point in points{
                 let newColorSector = ColorSelectorView(
                     frame: CGRect(
-                        x: _point.x,
-                        y: _point.y,
+                        x: point.x - (SELECTOR_SIZE/2),
+                        y: point.y - (SELECTOR_SIZE/2),
                         width: SELECTOR_SIZE,
                         height: SELECTOR_SIZE
                     ),
@@ -183,7 +181,7 @@ class ColorWheelViewController: UIViewController {
                     colorOption: ColorOption.basicInit(
                         context: PersistenceController.shared.container.viewContext,
                         owner: colorPalette,
-                        point: _point
+                        point: CGPoint(x: point.x - (SELECTOR_SIZE/2), y: point.y - (SELECTOR_SIZE/2))
                     )
                 )
 

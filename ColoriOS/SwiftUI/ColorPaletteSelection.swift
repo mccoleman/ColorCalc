@@ -13,6 +13,7 @@ struct ColorPaletteSelection: View {
     @FetchRequest(sortDescriptors: []) var colorPallettes: FetchedResults<ColorPallette>
     
     @State private var showingCreatePalletteAlert = false
+    @State private var showingRenamePalletteAlert = false
     @State private var showingCreateColorWheelVC = false
     @State private var showingEditColorWheelVC = false
     @State private var newPalletteName = ""
@@ -23,6 +24,7 @@ struct ColorPaletteSelection: View {
             List {
                 ForEach(colorPallettes, id:\.self) { palette in
                     Button(palette.unwrappedTitle) {
+                        selectedColorPalette = palette
                         showingEditColorWheelVC.toggle()
                     }
                     .tint(.black)
@@ -38,14 +40,11 @@ struct ColorPaletteSelection: View {
                         } label: {
                             Label("Edit", systemImage: "paintbrush")
                         }
-                        .alert("Rename This Pallette", isPresented: $showingCreatePalletteAlert) {
+                        .alert("Rename This Pallette", isPresented: $showingRenamePalletteAlert) {
                             TextField(palette.unwrappedTitle, text: $newPalletteName)
                             Button("Save and Create", action: renameSubmit)
                         }
                         .tint(.indigo)
-                    }
-                    .sheet(isPresented: $showingEditColorWheelVC) {
-                        ColorWheelVCRepresentable(colorPalette: palette)
                     }
                 }
                 
@@ -60,6 +59,11 @@ struct ColorPaletteSelection: View {
             .sheet(isPresented: $showingCreateColorWheelVC, onDismiss: didDismssCreate) {
                 if let p = selectedColorPalette {
                     ColorWheelVCRepresentable(colorPalette: p)
+                }
+            }
+            .sheet(isPresented: $showingEditColorWheelVC, onDismiss: didDismssCreate) {
+                if let p = selectedColorPalette {
+                    ColorWheelVCRepresentable(colorPalette:p)
                 }
             }
         }
@@ -81,6 +85,8 @@ struct ColorPaletteSelection: View {
     
     func didDismssCreate() {
         selectedColorPalette = nil
+        showingEditColorWheelVC = false
+        showingCreateColorWheelVC = false
     }
     
     private func deletePalettes(colorPalette: ColorPallette) {
