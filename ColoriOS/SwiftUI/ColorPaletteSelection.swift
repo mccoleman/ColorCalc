@@ -68,12 +68,15 @@ struct ColorPaletteSelection: View {
     func saveNameSubmit() {
         let pallette = ColorPallette(context: moc)
         pallette.title = newPalletteName
-        let colorOption = ColorOption(context: moc)
-        colorOption.hexString = "FFFFFF"
+        let colorOption = ColorOption.basicInit(context: moc,owner: pallette)
         pallette.colorOptions = [colorOption]
         try? moc.save()
         selectedColorPalette = pallette
         showingCreateColorWheelVC.toggle()
+    }
+    
+    func renameSubmit() {
+        
     }
     
     func didDismssCreate() {

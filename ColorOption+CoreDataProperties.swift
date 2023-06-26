@@ -21,6 +21,8 @@ extension ColorOption {
     @NSManaged public var owner: ColorPallette?
     @NSManaged public var createDate:Date?
     @NSManaged public var colorGroup: ColorGroup?
+    @NSManaged public var xPoint:NSNumber
+    @NSManaged public var yPoint:NSNumber
 
 }
 

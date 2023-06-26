@@ -8,6 +8,8 @@
     <entity name="ColorOption" representedClassName="ColorOption" syncable="YES">
         <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="hexString" optional="YES" attributeType="String"/>
+        <attribute name="xPoint" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="yPoint" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="colorGroup" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ColorGroup" inverseName="parent" inverseEntity="ColorGroup"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ColorPallette" inverseName="colorOptions" inverseEntity="ColorPallette"/>
     </entity>

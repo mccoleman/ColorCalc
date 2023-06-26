@@ -53,7 +53,7 @@ class ColorWheelViewController: UIViewController {
     override func viewDidLoad() {
         self.colorWheelView.renderColorWheel()
         super.viewDidLoad()
-        self.renderNewSelectorView()
+        self.createInitialListOfSelectorViews()
         self.colorHueView.buildGradientLayer()
         let sliderGesture = UIPanGestureRecognizer(target: self, action:(#selector(self.panHueSlider(_:))))
         self.hueSlider.addGestureRecognizer(sliderGesture)
@@ -93,7 +93,8 @@ class ColorWheelViewController: UIViewController {
                 
                 if newRadiusAngle.radius < (self.colorWheelView.frame.width/2) {
                     sender.setTranslation(CGPoint(x: 0, y: 0), in: viewToDrag)
-                    viewToDrag.color = self.colorWheelView.getPixelColorAt(point: newTruePoint)//.colorWithBrightness(brightness: self.brightness)
+                    viewToDrag.setColor(color: self.colorWheelView.getPixelColorAt(point: newTruePoint))
+                    viewToDrag.setCenterPoint(point: newTruePoint)
                     viewToDrag.center = newTruePoint
                     self.baseSelector = viewToDrag
                     let radiusChange = initialRadiusAngle.radius - newRadiusAngle.radius
@@ -112,9 +113,9 @@ class ColorWheelViewController: UIViewController {
                                     angle: selectorRadiusAngle.angle - angleChange,
                                     radius: min(self.colorWheelView.frame.width/2-0.5,selectorRadiusAngle.radius - radiusChange),
                                     center: self.colorWheelView.center)
-                                
+                                selector.setCenterPoint(point: newSelectorPoint)
                                 selector.center = newSelectorPoint
-                                selector.color = self.colorWheelView.getPixelColorAt(point: selector.center)//.colorWithBrightness(brightness: self.brightness)
+                                selector.setColor(color: self.colorWheelView.getPixelColorAt(point: selector.center))
                             }
                         }
                         self.colorHueView.color = viewToDrag.color
@@ -122,6 +123,7 @@ class ColorWheelViewController: UIViewController {
                     self.collectionView.reloadData()
                 }
             }
+            try? PersistenceController.shared.container.viewContext.save()
             
         }
     }
@@ -167,34 +169,49 @@ class ColorWheelViewController: UIViewController {
                 quadrant: colorWheelView.quadrantInView(viewCenter: baseSelector.center),
                 harmony: harmony
             )
-            
+            let _point = CGPoint(x: colorWheelView.center.x - (SELECTOR_SIZE/2),
+                                 y: colorWheelView.center.y - (SELECTOR_SIZE/2))
             for point in points{
                 let newColorSector = ColorSelectorView(
                     frame: CGRect(
-                        x: point.x - (SELECTOR_SIZE/2),
-                        y: point.y - (SELECTOR_SIZE/2),
+                        x: _point.x,
+                        y: _point.y,
                         width: SELECTOR_SIZE,
                         height: SELECTOR_SIZE
                     ),
-                    color: self.colorWheelView.getPixelColorAt(point: point)//.colorWithBrightness(brightness:self.brightness)
+                    color: self.colorWheelView.getPixelColorAt(point: point),
+                    colorOption: ColorOption.basicInit(
+                        context: PersistenceController.shared.container.viewContext,
+                        owner: colorPalette,
+                        point: _point
+                    )
                 )
 
                 self.addColorSelectorPanRecognizer(colorSelector: newColorSector)
                 self.selectorsArray.append(newColorSector)
                 self.colorWheelView.addSubview(newColorSector)
             }
+            
+            try? PersistenceController.shared.container.viewContext.save()
             self.collectionView.reloadData()
         }
     }
     
     func renderNewSelectorView(){
-        
+        let _point = CGPoint(x: colorWheelView.center.x - (SELECTOR_SIZE/2),
+                             y: colorWheelView.center.y - (SELECTOR_SIZE/2))
         let newColorSector = ColorSelectorView(
             frame: CGRect(
-                x: colorWheelView.center.x - (SELECTOR_SIZE/2),
-                y: colorWheelView.center.y - (SELECTOR_SIZE/2),
+                x: _point.x,
+                y: _point.y,
                 width: SELECTOR_SIZE,
                 height: SELECTOR_SIZE
+            ),
+            color: .white,
+            colorOption: ColorOption.basicInit(
+                context: PersistenceController.shared.container.viewContext,
+                owner: colorPalette,
+                point: _point
             )
         )
         
@@ -202,8 +219,27 @@ class ColorWheelViewController: UIViewController {
         self.selectorsArray.append(newColorSector)
         self.colorWheelView.addSubview(newColorSector)
         self.baseSelector = newColorSector
+        try? PersistenceController.shared.container.viewContext.save()
     }
     
+    func createInitialListOfSelectorViews() {
+        for colorOption in self.colorPalette.sortedColorOptions {
+            let newColorSector = ColorSelectorView(
+                frame: CGRect(
+                    x: CGFloat(truncating: colorOption.xPoint),
+                    y: CGFloat(truncating: colorOption.yPoint),
+                    width: SELECTOR_SIZE,
+                    height: SELECTOR_SIZE
+                ),
+                color: UIColor.colorFromHexString(hexString: colorOption.hexString ?? ""),
+                colorOption: colorOption
+            )
+            self.addColorSelectorPanRecognizer(colorSelector: newColorSector)
+            self.selectorsArray.append(newColorSector)
+            self.colorWheelView.addSubview(newColorSector)
+            self.baseSelector = newColorSector
+        }
+    }
 
     func addColorSelectorPanRecognizer(colorSelector:ColorSelectorView){
         let panGesture = UIPanGestureRecognizer(target: self, action:(#selector(self.panColorWheelView(_:))))

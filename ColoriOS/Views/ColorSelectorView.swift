@@ -11,21 +11,28 @@ import UIKit
 class ColorSelectorView: UIView {
     
     var color:UIColor
+    var colorOption:ColorOption
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         self.layer.cornerRadius = rect.width/2
         self.layer.borderWidth = 2
     }
-
-    override init(frame: CGRect) {
-        self.color = UIColor.white
+    
+    init(frame:CGRect, color:UIColor, colorOption:ColorOption){
+        self.color = color
+        self.colorOption = colorOption
         super.init(frame: frame)
     }
     
-    init(frame:CGRect,color:UIColor){
+    func setColor(color:UIColor) {
         self.color = color
-        super.init(frame: frame)
+        self.colorOption.hexString = color.hex
+    }
+    
+    func setCenterPoint(point:CGPoint) {
+        self.colorOption.xPoint = point.x as NSNumber
+        self.colorOption.yPoint = point.y as NSNumber
     }
     
     required init?(coder: NSCoder) {
