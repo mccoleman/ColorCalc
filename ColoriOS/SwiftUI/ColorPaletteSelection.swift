@@ -55,7 +55,8 @@ struct ColorPaletteSelection: View {
             }
             .alert("Name This Palette", isPresented: $showingCreatePalletteAlert) {
                 TextField("Color Palette #\(colorPallettes.count + 1)", text: $newPalletteName)
-                Button("Save and Create", action: saveNameSubmit)
+                Button("Create", action: saveNameSubmit)
+                Button("Cancel", role: .cancel, action: {})
             }
             .sheet(isPresented: $showingCreateColorWheelVC, onDismiss: didDismssCreate) {
                 if let p = selectedColorPalette {
