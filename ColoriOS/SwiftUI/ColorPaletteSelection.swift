@@ -17,29 +17,13 @@ struct ColorPaletteSelection: View {
     @State private var showingCreateColorWheelVC = false
     @State private var showingEditColorWheelVC = false
     @State private var newPalletteName = ""
-    @State var selectedColorPalette:ColorPallette?
-    let rows = [GridItem(.fixed(40), spacing:1), GridItem(.fixed(10))]
+    @State private var selectedColorPalette:ColorPallette?
     
     var body: some View {
         VStack {
             List {
                 ForEach(colorPallettes, id:\.self) { palette in
-                    VStack {
-                        HStack {
-                            LazyHGrid(rows: rows, alignment: .top, spacing: 0) {
-                                ForEach(palette.sortedColorOptions) { colorOption in
-                                    Color(uiColor: UIColor.colorFromHexString(hexString: colorOption.hexString)).frame(width: 40)
-                                    Text(colorOption.hexString)
-                                        .font(.system(size: 8))
-                                }
-                            }
-                            Spacer()
-                        }
-                        HStack {
-                            Text(palette.unwrappedTitle)
-                            Spacer()
-                        }
-                    }
+                    ColorPaletteListView(colorPalette: palette)
                     .onTapGesture {
                         selectedColorPalette = palette
                         showingEditColorWheelVC.toggle()
@@ -80,7 +64,7 @@ struct ColorPaletteSelection: View {
             }
             .sheet(isPresented: $showingEditColorWheelVC, onDismiss: didDismssCreate) {
                 if let p = selectedColorPalette {
-                    ColorWheelVCRepresentable(colorPalette:p, newPalette: false)
+                    ColorWheelVCRepresentable(colorPalette: p, newPalette: false)
                 }
             }
         }

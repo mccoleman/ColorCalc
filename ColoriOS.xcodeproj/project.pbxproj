@@ -35,6 +35,7 @@
 		C0AD4B2A2A4150A600401DE8 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4B292A4150A600401DE8 /* Persistence.swift */; };
 		C0AD4B2D2A4284D200401DE8 /* ColorHarmony.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4B2C2A4284D200401DE8 /* ColorHarmony.swift */; };
 		C0AD4B2F2A42850000401DE8 /* Quandrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4B2E2A42850000401DE8 /* Quandrant.swift */; };
+		C0AD4B332A4CB1CD00401DE8 /* ColorPaletteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4B322A4CB1CD00401DE8 /* ColorPaletteListView.swift */; };
 		C0BD6207254E02BC00A156F1 /* ColorOutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BD6206254E02BC00A156F1 /* ColorOutputView.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,7 @@
 		C0AD4B292A4150A600401DE8 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		C0AD4B2C2A4284D200401DE8 /* ColorHarmony.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHarmony.swift; sourceTree = "<group>"; };
 		C0AD4B2E2A42850000401DE8 /* Quandrant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quandrant.swift; sourceTree = "<group>"; };
+		C0AD4B322A4CB1CD00401DE8 /* ColorPaletteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteListView.swift; sourceTree = "<group>"; };
 		C0BD6206254E02BC00A156F1 /* ColorOutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOutputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,6 +163,7 @@
 				C05D179D2549F8D000F92079 /* ColorSelectorView.swift */,
 				C0BD6206254E02BC00A156F1 /* ColorOutputView.swift */,
 				C0392A102550FF0800C80814 /* HueView.swift */,
+				C0AD4B322A4CB1CD00401DE8 /* ColorPaletteListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				C0AD4AE22A41349A00401DE8 /* ColorGroup+CoreDataProperties.swift in Sources */,
 				C0AD4AED2A4149C900401DE8 /* ColoriOSApp.swift in Sources */,
 				C0AD4AE42A41349A00401DE8 /* ColorOption+CoreDataProperties.swift in Sources */,
+				C0AD4B332A4CB1CD00401DE8 /* ColorPaletteListView.swift in Sources */,
 				C0AD4AEB2A4147A100401DE8 /* ColorWheelVCRepresentable.swift in Sources */,
 				C0AD4B2D2A4284D200401DE8 /* ColorHarmony.swift in Sources */,
 				C0AD4AE32A41349A00401DE8 /* ColorOption+CoreDataClass.swift in Sources */,
