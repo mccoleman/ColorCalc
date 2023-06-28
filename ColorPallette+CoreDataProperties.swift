@@ -19,7 +19,7 @@ extension ColorPallette {
 
     @NSManaged public var title: String?
     @NSManaged public var colorOptions: NSSet?
-    @NSManaged public var createDate:Date?
+    @NSManaged public var createDate:Date
     
     public var unwrappedTitle: String {
         return title ?? "unknown Title"
@@ -31,7 +31,7 @@ extension ColorPallette {
         }
         
         return set.sorted {
-            $0.createDate ?? Date() > $1.createDate ?? Date ()
+            $0.createDate > $1.createDate
         }
     }
 }

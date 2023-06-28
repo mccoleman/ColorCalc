@@ -15,6 +15,7 @@ public class ColorOption: NSManagedObject {
     
     static func basicInit(context:NSManagedObjectContext, owner:ColorPallette, point:CGPoint) -> ColorOption {
         let colorOption = ColorOption(context: context)
+        colorOption.createDate = Date()
         colorOption.hexString = "FFFFFF"
         colorOption.owner = owner
         colorOption.xPoint = (point.x) as NSNumber
@@ -24,6 +25,7 @@ public class ColorOption: NSManagedObject {
     
     static func basicInit(context:NSManagedObjectContext, owner:ColorPallette) -> ColorOption {
         let colorOption = ColorOption(context: context)
+        colorOption.createDate = Date()
         colorOption.hexString = "FFFFFF"
         colorOption.owner = owner
         colorOption.xPoint = 0.0

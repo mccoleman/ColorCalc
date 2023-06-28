@@ -18,12 +18,23 @@ struct ColorPaletteSelection: View {
     @State private var showingEditColorWheelVC = false
     @State private var newPalletteName = ""
     @State var selectedColorPalette:ColorPallette?
+    let rows = [GridItem(.fixed(40), spacing:1), GridItem(.fixed(10))]
     
     var body: some View {
         VStack {
             List {
                 ForEach(colorPallettes, id:\.self) { palette in
-                    Button(palette.unwrappedTitle) {
+                    VStack {
+                        LazyHGrid(rows: rows, alignment: .top, spacing: 0) {
+                            ForEach(palette.sortedColorOptions) { colorOption in
+                                Color(uiColor: UIColor.colorFromHexString(hexString: colorOption.hexString)).frame(width: 40)
+                                Text(colorOption.hexString)
+                                    .font(.system(size: 8))
+                            }
+                        }
+                        Text(palette.unwrappedTitle)
+                    }
+                    .onTapGesture {
                         selectedColorPalette = palette
                         showingEditColorWheelVC.toggle()
                     }
@@ -47,8 +58,8 @@ struct ColorPaletteSelection: View {
                         .tint(.indigo)
                     }
                 }
-                
             }
+            
             Button("Create New Pallette"){
                 showingCreatePalletteAlert.toggle()
             }
@@ -58,12 +69,12 @@ struct ColorPaletteSelection: View {
             }
             .sheet(isPresented: $showingCreateColorWheelVC, onDismiss: didDismssCreate) {
                 if let p = selectedColorPalette {
-                    ColorWheelVCRepresentable(colorPalette: p)
+                    ColorWheelVCRepresentable(colorPalette: p, newPalette: true)
                 }
             }
             .sheet(isPresented: $showingEditColorWheelVC, onDismiss: didDismssCreate) {
                 if let p = selectedColorPalette {
-                    ColorWheelVCRepresentable(colorPalette:p)
+                    ColorWheelVCRepresentable(colorPalette:p, newPalette: false)
                 }
             }
         }
@@ -72,8 +83,7 @@ struct ColorPaletteSelection: View {
     func saveNameSubmit() {
         let pallette = ColorPallette(context: moc)
         pallette.title = newPalletteName
-        let colorOption = ColorOption.basicInit(context: moc,owner: pallette)
-        pallette.colorOptions = [colorOption]
+        pallette.createDate = Date()
         try? moc.save()
         selectedColorPalette = pallette
         showingCreateColorWheelVC.toggle()

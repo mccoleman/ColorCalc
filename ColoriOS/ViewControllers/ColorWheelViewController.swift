@@ -29,6 +29,7 @@ class ColorWheelViewController: UIViewController {
     @IBOutlet var hueSlider:UIView!
     
     var colorPalette:ColorPallette!
+    var newPalette:Bool!
 
     private let reuseIdentifier = "Cell"
     private var harmonyState:ColorHarmony = .None
@@ -53,7 +54,11 @@ class ColorWheelViewController: UIViewController {
     override func viewDidLoad() {
         self.colorWheelView.renderColorWheel()
         super.viewDidLoad()
-        self.createInitialListOfSelectorViews()
+        if newPalette {
+            self.renderNewSelectorView()
+        } else {
+            self.createInitialListOfSelectorViews()
+        }
         self.colorHueView.buildGradientLayer()
         let sliderGesture = UIPanGestureRecognizer(target: self, action:(#selector(self.panHueSlider(_:))))
         self.hueSlider.addGestureRecognizer(sliderGesture)
@@ -169,7 +174,8 @@ class ColorWheelViewController: UIViewController {
                 quadrant: colorWheelView.quadrantInView(viewCenter: baseSelector.center),
                 harmony: harmony
             )
-            for point in points{
+            for point in points {
+                let _centerPoint = CGPoint(x: point.x - (SELECTOR_SIZE/2), y: point.y - (SELECTOR_SIZE/2))
                 let newColorSector = ColorSelectorView(
                     frame: CGRect(
                         x: point.x - (SELECTOR_SIZE/2),
@@ -181,9 +187,11 @@ class ColorWheelViewController: UIViewController {
                     colorOption: ColorOption.basicInit(
                         context: PersistenceController.shared.container.viewContext,
                         owner: colorPalette,
-                        point: CGPoint(x: point.x - (SELECTOR_SIZE/2), y: point.y - (SELECTOR_SIZE/2))
+                        point: _centerPoint
                     )
                 )
+                
+                newColorSector.setColor(color: self.colorWheelView.getPixelColorAt(point: _centerPoint))
 
                 self.addColorSelectorPanRecognizer(colorSelector: newColorSector)
                 self.selectorsArray.append(newColorSector)
