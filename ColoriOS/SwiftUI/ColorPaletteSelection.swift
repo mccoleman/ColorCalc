@@ -25,14 +25,20 @@ struct ColorPaletteSelection: View {
             List {
                 ForEach(colorPallettes, id:\.self) { palette in
                     VStack {
-                        LazyHGrid(rows: rows, alignment: .top, spacing: 0) {
-                            ForEach(palette.sortedColorOptions) { colorOption in
-                                Color(uiColor: UIColor.colorFromHexString(hexString: colorOption.hexString)).frame(width: 40)
-                                Text(colorOption.hexString)
-                                    .font(.system(size: 8))
+                        HStack {
+                            LazyHGrid(rows: rows, alignment: .top, spacing: 0) {
+                                ForEach(palette.sortedColorOptions) { colorOption in
+                                    Color(uiColor: UIColor.colorFromHexString(hexString: colorOption.hexString)).frame(width: 40)
+                                    Text(colorOption.hexString)
+                                        .font(.system(size: 8))
+                                }
                             }
+                            Spacer()
                         }
-                        Text(palette.unwrappedTitle)
+                        HStack {
+                            Text(palette.unwrappedTitle)
+                            Spacer()
+                        }
                     }
                     .onTapGesture {
                         selectedColorPalette = palette
@@ -60,11 +66,11 @@ struct ColorPaletteSelection: View {
                 }
             }
             
-            Button("Create New Pallette"){
+            Button("Create New Palette"){
                 showingCreatePalletteAlert.toggle()
             }
-            .alert("Name This Pallette", isPresented: $showingCreatePalletteAlert) {
-                TextField("Color Pallette #\(colorPallettes.count + 1)", text: $newPalletteName)
+            .alert("Name This Palette", isPresented: $showingCreatePalletteAlert) {
+                TextField("Color Palette #\(colorPallettes.count + 1)", text: $newPalletteName)
                 Button("Save and Create", action: saveNameSubmit)
             }
             .sheet(isPresented: $showingCreateColorWheelVC, onDismiss: didDismssCreate) {
@@ -82,7 +88,7 @@ struct ColorPaletteSelection: View {
     
     func saveNameSubmit() {
         let pallette = ColorPallette(context: moc)
-        pallette.title = newPalletteName
+        pallette.title = newPalletteName == "" ? "Color Palette #\(colorPallettes.count + 1)" : newPalletteName
         pallette.createDate = Date()
         try? moc.save()
         selectedColorPalette = pallette
