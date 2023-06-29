@@ -237,7 +237,7 @@ class ColorWheelViewController: UIViewController {
                     width: SELECTOR_SIZE,
                     height: SELECTOR_SIZE
                 ),
-                color: UIColor.colorFromHexString(hexString: colorOption.hexString ?? ""),
+                color: UIColor.colorFromHexString(hexString: colorOption.hexString),
                 colorOption: colorOption
             )
             self.addColorSelectorPanRecognizer(colorSelector: newColorSector)

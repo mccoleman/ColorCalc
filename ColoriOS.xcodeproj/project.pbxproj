@@ -36,6 +36,7 @@
 		C0AD4B2D2A4284D200401DE8 /* ColorHarmony.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4B2C2A4284D200401DE8 /* ColorHarmony.swift */; };
 		C0AD4B2F2A42850000401DE8 /* Quandrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4B2E2A42850000401DE8 /* Quandrant.swift */; };
 		C0AD4B332A4CB1CD00401DE8 /* ColorPaletteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4B322A4CB1CD00401DE8 /* ColorPaletteListView.swift */; };
+		C0AD4B362A4DD5D800401DE8 /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD4B342A4DCEC000401DE8 /* TestCoreDataStack.swift */; };
 		C0BD6207254E02BC00A156F1 /* ColorOutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BD6206254E02BC00A156F1 /* ColorOutputView.swift */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +95,7 @@
 		C0AD4B2C2A4284D200401DE8 /* ColorHarmony.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHarmony.swift; sourceTree = "<group>"; };
 		C0AD4B2E2A42850000401DE8 /* Quandrant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quandrant.swift; sourceTree = "<group>"; };
 		C0AD4B322A4CB1CD00401DE8 /* ColorPaletteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteListView.swift; sourceTree = "<group>"; };
+		C0AD4B342A4DCEC000401DE8 /* TestCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
 		C0BD6206254E02BC00A156F1 /* ColorOutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOutputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -222,6 +224,7 @@
 		C0A1992A246323FD00166095 /* ColoriOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				C0AD4B342A4DCEC000401DE8 /* TestCoreDataStack.swift */,
 				C0A1992B246323FD00166095 /* ColoriOSTests.swift */,
 				C0A1992D246323FD00166095 /* Info.plist */,
 			);
@@ -452,6 +455,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0A1992C246323FD00166095 /* ColoriOSTests.swift in Sources */,
+				C0AD4B362A4DD5D800401DE8 /* TestCoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
